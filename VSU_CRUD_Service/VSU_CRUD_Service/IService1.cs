@@ -14,10 +14,17 @@ namespace VSU_CRUD_Service
     {
 
         [OperationContract]
-        string GetData(int value);
+        [WebInvoke(Method="GET", UriTemplate = "findAll", ResponseFormat = WebMessageFormat.Json)]
+        List<News> findAll();
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        [WebInvoke(Method = "GET", UriTemplate = "find/{id}", ResponseFormat = WebMessageFormat.Json)]
+        News find(string id);
+        //[OperationContract]
+        //string GetData(int value);
+
+        //[OperationContract]
+        //CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Добавьте здесь операции служб
     }

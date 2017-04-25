@@ -8,26 +8,38 @@ using System.Text;
 
 namespace VSU_CRUD_Service
 {
-    // ПРИМЕЧАНИЕ. Команду "Переименовать" в меню "Рефакторинг" можно использовать для одновременного изменения имени класса "Service1" в коде, SVC-файле и файле конфигурации.
-    // ПРИМЕЧАНИЕ. Чтобы запустить клиент проверки WCF для тестирования службы, выберите элементы Service1.svc или Service1.svc.cs в обозревателе решений и начните отладку.
     public class Service1 : IService1
     {
-        public string GetData(int value)
+
+        public News find(string id)
         {
-            return string.Format("You entered: {0}", value);
+            using (DatabaseEntities de = new DatabaseEntities())
+            {
+                return de.Table.Where(pe => pe.Id.ToString() == id).Select(pe => new News
+                {
+                    Id = pe.Id.ToString(),
+                    Title = pe.Title,
+                    Description = pe.Description,
+                    Author = pe.Author,
+                    Date = (DateTime)pe.Date
+                }).First();
+            };
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public List<News> findAll()
         {
-            if (composite == null)
+            using (DatabaseEntities de = new DatabaseEntities())
             {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+                return de.Table.Select(pe => new News
+                {
+                    Id = pe.Id.ToString(),
+                    Title = pe.Title,
+                    Description = pe.Description,
+                    Author = pe.Author,
+                    Date = (DateTime)pe.Date
+                }).ToList();
+            };
         }
-    }
 }
+}
+
