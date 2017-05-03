@@ -19,5 +19,6 @@ namespace VSU_CRUD_Service
         public string Description { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public string Author { get; set; }
+        public string Type { get; set; }
     }
 }

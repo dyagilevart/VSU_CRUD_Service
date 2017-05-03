@@ -21,7 +21,8 @@ namespace VSU_CRUD_Service
                     Title = pe.Title,
                     Description = pe.Description,
                     Author = pe.Author,
-                    Date = (DateTime)pe.Date
+                    Date = pe.Date.ToString(),
+                    Type = pe.Type
                 }).First();
             };
         }
@@ -36,7 +37,8 @@ namespace VSU_CRUD_Service
                     Title = pe.Title,
                     Description = pe.Description,
                     Author = pe.Author,
-                    Date = (DateTime)pe.Date
+                    Date = pe.Date.ToString(),
+                    Type = pe.Type
                 }).ToList();
             };
         }
